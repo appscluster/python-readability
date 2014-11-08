@@ -12,14 +12,15 @@ if sys.platform == 'darwin':
 
 setup(
     name="readability-lxml",
-    version="0.3.0.5",
-    author="Yuri Baburov",
-    author_email="burchik@gmail.com",
-    description="fast python port of arc90's readability tool",
+    version="0.3.0.6",
+    author="Abdul Hamid",
+    author_email="ah@appscluster.com",
+    credit="Yuri Baburov <burchik@gmail.com>",
+    description="Fast python port of arc90's readability tool",
     test_suite = "tests.test_article_only",
     long_description=open("README").read(),
     license="Apache License 2.0",
-    url="http://github.com/buriy/python-readability",
+    url="http://github.com/appscluster/python-readability",
     packages=['readability'],
     install_requires=[
         "chardet",

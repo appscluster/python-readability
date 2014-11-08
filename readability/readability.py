@@ -591,6 +591,7 @@ def main():
     parser = OptionParser(usage="%prog: [options] [file]")
     parser.add_option('-v', '--verbose', action='store_true')
     parser.add_option('-u', '--url', default=None, help="use URL instead of a local file")
+    parser.add_option('-a', '--agent', default=None, help="Add a User-Agent e.g: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36")
     parser.add_option('-p', '--positive-keywords', default=None, help="positive keywords (separated with comma)", action='store')
     parser.add_option('-n', '--negative-keywords', default=None, help="negative keywords (separated with comma)", action='store')
     (options, args) = parser.parse_args()
@@ -601,8 +602,15 @@ def main():
 
     file = None
     if options.url:
-        import urllib
-        file = urllib.urlopen(options.url)
+        if (options.agent):
+            import urllib2
+            headers = {'User-Agent':options.agent}    
+            req = urllib2.Request(url=options.url, headers=headers)
+            file = urllib2.urlopen(req)
+        else:
+            import urllib
+            file = urllib.urlopen(options.url)
+
     else:
         file = open(args[0], 'rt')
     enc = sys.__stdout__.encoding or 'utf-8' # XXX: this hack could not always work, better to set PYTHONIOENCODING
